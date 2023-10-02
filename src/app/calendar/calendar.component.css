@@ -1,0 +1,110 @@
+/* styles.scss or styles.css */
+@import '~node_modules/angular-calendar/css/angular-calendar.css';
+
+.day-clicked {
+    animation: scaleAnimation 0.2s ease-in-out;
+}
+.modal-dialog.close {
+background-color: #3498db;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /*gap: 5px;*/
+    /*width: 83vw; !* Fill the full screen width *!*/
+    height: 90vh; /* Fill the full screen height */
+    /*margin-left: 10px;*/
+}
+
+.calendar-header {
+    text-align: center;
+    font-weight: bold;
+    grid-column: 1 / span 7;
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /*gap: 5px;*/
+    /*width: 99vw;*/
+    /*margin-left: 10px;*/
+}
+
+.day {
+    text-align: center;
+    padding: 5px;
+    font-size: 16px; /* Adjust the font size as needed */
+    font-weight: bold;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+}
+
+.day-of-week {
+    text-align: center;
+    padding: 5px;
+    font-size: 16px; /* Adjust the font size as needed */
+    font-weight: bold;
+    border: 1px solid #ccc;
+    background-color: #d7d4d4;
+}
+
+.weekend {
+    background-color: #f0f0f0;
+}
+.day:hover {
+    cursor: pointer;
+    background-color: #d7d4d4;
+}
+.disabled {
+    background-color: #eee; /* Change the background color for disabled cells */
+    color: #999; /* Change the text color for disabled cells */
+    pointer-events: none; /* Disable pointer events on the cell */
+    cursor: not-allowed; /* Change the cursor for disabled cells */
+}
+
+.student-list {
+    padding: 5px;
+    border-radius: 15px; /* Add rounded corners */
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+.calendar-navigation {
+    display: flex;
+    align-items: center;
+    /*justify-content: space-between;*/
+    padding: 10px;
+    background-color: #484646;
+    color: white;
+}
+
+.nav-btn {
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+}
+
+.calendar-navigation button {
+    background: none;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 30px;
+    margin-top: -12px;
+}
+
+.calendar-header {
+    font-size: 24px;
+}
+
+.new-time-column {
+    width: 80px;
+}
+.new-select-column {
+    width: 100px;
+    height: 30px;
+}
+.new-number-column {
+    width: 50px;
+}

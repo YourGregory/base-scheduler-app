@@ -1,0 +1,33 @@
+/* In your sidenav component's CSS file */
+.sidenav {
+    width: 7%;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow-x: hidden;
+    padding-top: 60px; /* Adjust the padding to avoid overlapping with other content */
+}
+
+.sidenav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidenav li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #555;
+}
+
+.sidenav a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+    background-color: #007bff;
+    color: white;
+}

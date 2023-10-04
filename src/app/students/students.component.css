@@ -1,0 +1,20 @@
+.color-column {
+  border-radius: 15px;
+}
+
+.table:hover {
+  cursor: pointer;
+  background-color: #d7d4d4;
+}
+
+.block-color {
+  background-color: #cccccc;
+}
+
+.top-element {
+  padding-bottom: 15px;
+}
+
+.left-align {
+  margin-left: 15px;
+}

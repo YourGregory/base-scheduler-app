@@ -1,12 +1,12 @@
-<div class="">
-    <div class="calendar-navigation">
+<div class="container-fluid">
+    <div [@top-load] class="calendar-navigation">
         <div class="btn-group nav-btn">
             <button (click)="goToPreviousMonth()"> < </button>
             <h1 class="calendar-header">{{ currentMonth | date: 'MMMM yyyy' }}</h1>
             <button (click)="goToNextMonth()"> > </button>
         </div>
     </div>
-    <div class="days-of-week">
+    <div [@top-load] class="days-of-week">
         <div class="day-of-week">Mon</div>
         <div class="day-of-week">Tue</div>
         <div class="day-of-week">Wed</div>

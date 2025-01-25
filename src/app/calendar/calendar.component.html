@@ -16,66 +16,15 @@
         <div class="day-of-week">Sun</div>
     </div>
     <div class="calendar">
-        <div (click)="openModal(day, modalContent)" *ngFor="let day of calendarDays" [@dayClick]
-             [class.selected]="selectedDay?.date === day.date" [ngClass]="{'disabled': day.disabled}" class="day">
+        <div *ngFor="let day of calendarDays" [@dayClick]
+             [class.selected]="selectedDay?.date === day.date" (click)="openWeekView(day.date)" [ngClass]="{'disabled': day.disabled}" class="day">
             {{ day.date | date: 'dd' }}
             <div *ngIf="hasEventsForDay(day.date)" class="events-list">
                 <ul>
-                    <li *ngFor="let student of getStudentsForDay(day.date)" [ngStyle]="{'background-color': student.color}"
-                        class="student-list">{{ student.firstName}} {{student.lastName }}</li>
+                    <li *ngFor="let currentEvent of getStudentsForDay(day.date)" [ngStyle]="{'background-color': currentEvent.student.color}"
+                        class="student-list">{{ currentEvent.student.firstName}} {{currentEvent.student.lastName }} : {{getFormattedTime(currentEvent.lessonStart, currentEvent.lessonEnd)}}</li>
                 </ul>
             </div>
         </div>
     </div>
-
-    <ng-template #modalContent let-modal>
-        <div class="modal-header">
-            <h5 class="modal-title">Event for {{ selectedDay.date | date: 'dd MMMM yyyy' }}</h5>
-            <button type="button" style="margin-left: 15%" class="btn btn-dark" (click)="addNewRow()">Add New</button>
-            <button (click)="modal.dismiss('Cross click')" class="close" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Student</th>
-                    <th>Lesson Start</th>
-                    <th>Lesson End</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let lesson of filterEventsByDay(selectedDay)">
-                    <td><a href="{{lesson.student.link}}"
-                           target="_blank">{{ lesson.student.firstName}} {{lesson.student.lastName}}</a></td>
-                    <td>{{ lesson.lessonStart | date: 'shortTime'}} </td>
-                    <td> {{lesson.lessonEnd | date: 'shortTime'}}</td>
-                    <td>{{ lesson.price | currency: 'USD':true:'1.2-2' }}</td>
-                </tr>
-                <tr *ngIf="isNewRow">
-                    <td>
-                        <!-- Add a dropdown for selecting an existing student -->
-                        <select #selectValue class="form-select new-select-column" [(ngModel)]="newEvent.student"
-                                (change)="onStudentSelected(selectValue.value)">
-                            <option *ngFor="let student of students" [value]="student.id">
-                                {{ student.firstName }} {{ student.lastName }}
-                            </option>
-                        </select>
-                    </td>
-                    <td><input class="new-column" type="time" [(ngModel)]="newEvent.lessonStart"></td>
-                    <td><input class="new-column" type="time" [(ngModel)]="newEvent.lessonEnd"></td>
-                    <td><input class="new-number-column" type="number" [(ngModel)]="newEvent.price"></td>
-                </tr>
-                <tr *ngIf="isNewRow">
-                    <td colspan="4" class="text-right">
-                        <button type="button" class="mr-1 btn btn-success" (click)="saveNewRow()">Submit</button>
-                        <button type="button" class="btn btn-danger" (click)="cancelNewRow()">Cancel</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </ng-template>
 </div>

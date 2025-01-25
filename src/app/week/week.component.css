@@ -1,0 +1,67 @@
+.week-calendar {
+  display: grid;
+  /*grid-template-columns: 1fr repeat(7, 2fr);*/
+  /*grid-template-rows: repeat(11, 1fr);*/
+  gap: 1px;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  height: 865px; /* Set a fixed height for the calendar container */
+  overflow: auto; /* Enable vertical scrolling when the content exceeds the container height */
+}
+
+.student-list {
+  padding: 5px;
+  border-radius: 15px; /* Add rounded corners */
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.block-color {
+  background-color: #cccccc;
+}
+.week-calendar th {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border: 1px solid #ccc;
+  height: 70px;
+  text-align: center;
+}
+
+.week-calendar th:first-child {
+  background-color: transparent;
+}
+
+.week-calendar td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 10px;
+}
+
+.week-calendar tr:nth-child(odd) td {
+  background-color: #e6e6e6;
+}
+@media (max-width: 768px) {
+  .week-calendar {
+    height: 400px; /* Adjust the height for tablets or smaller screens */
+  }
+}
+
+/* Further adjustments for mobile screens */
+@media (max-width: 576px) {
+  .week-calendar {
+    height: 300px; /* Adjust the height for mobile screens */
+  }
+}
+
+
+.new-time-column {
+  width: 80px;
+}
+.new-select-column {
+  width: 100px;
+  height: 30px;
+}
+.new-number-column {
+  width: 50px;
+}
+

@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Student} from "../model/student";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {Event} from "../model/event";
+import {StudentService} from "../service/student.service";
+import {catchError, throwError} from "rxjs";
 
 @Component({
   selector: 'app-students',
@@ -12,7 +13,7 @@ import {Event} from "../model/event";
     trigger('load', [
       transition(':enter', [
         style({transform: 'scale(0.8)', opacity: 0}),
-        animate('300ms', style({transform: 'scale(1)', opacity: 1})),
+        animate('400ms', style({transform: 'scale(1)', opacity: 1})),
       ]),
     ]),
     trigger('top-load', [
@@ -23,10 +24,23 @@ import {Event} from "../model/event";
     ]),
   ],
 })
-export class StudentsComponent {
+export class StudentsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) {
+  ngOnInit() {
+    this.getAllStudents();
   }
+
+  constructor(private modalService: NgbModal, private studentService: StudentService) {
+  }
+
+  getAllStudents() {
+    this.studentService.getAllStudents().subscribe(students => {
+      console.log('entered in get all')
+      this.students = students;
+      console.log(this.students);
+    });
+  }
+
   isNewRow: boolean = false;
   newStudent: any =
     {
@@ -36,38 +50,56 @@ export class StudentsComponent {
       link: '',
       color: ''
     };
-  students: Student[] = [
-    {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      link: 'https://example.com/johndoe',
-      color: '#ff5733',
-    },
-    {
-      id: 2,
-      firstName: 'Jane',
-      lastName: 'Smith',
-      link: 'https://example.com/janesmith',
-      color: '#33ff57',
-    }
-  ];
+  students: Student[] = [];
 
   saveNewRow() {
-    this.students.push(this.newStudent);
-    console.log("here")
+    if (this.isNewRow) {
+      this.studentService.create(this.newStudent).pipe(
+        catchError((err) => {
+          return this.catchAppError(err);
+        })
+      ).subscribe(value => {
+        this.changesSubscribe();
+      });
+    } else {
+      this.studentService.update(this.newStudent).pipe(
+        catchError((err) => {
+          return this.catchAppError(err);
+        })
+      ).subscribe(value => {
+        this.changesSubscribe()
+      });
+    }
+  }
+
+  private catchAppError(err: any) {
+    window.alert("ooops... error :(: ");
+    console.error(err.error);
+    return throwError(() => err);
+  }
+
+  private changesSubscribe() {
+    this.getAllStudents();
     this.modalService.dismissAll();
     this.cancelNewRow();
+    console.log("here")
   }
 
   openStudentModal(isNew: boolean, student: any, content: any) {
     this.isNewRow = isNew;
     if (student != null)
       this.newStudent = student;
+    else
+      this.emptyStudent();
     this.modalService.open(content, {centered: true}); // Open the modal
   }
 
   cancelNewRow() {
+    this.emptyStudent()
+    this.isNewRow = false
+  }
+
+  private emptyStudent() {
     this.newStudent =
       {
         id: 0,
@@ -76,6 +108,5 @@ export class StudentsComponent {
         link: '',
         color: ''
       };
-    this.isNewRow = false
   }
 }

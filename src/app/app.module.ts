@@ -10,13 +10,16 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule} from "@angular/forms";
 import { StudentsComponent } from './students/students.component';
+import { HttpClientModule} from "@angular/common/http";
+import { WeekComponent } from './week/week.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarComponent,
     SidenavComponent,
-    StudentsComponent
+    StudentsComponent,
+    WeekComponent
   ],
     imports: [
         BrowserModule,
@@ -27,7 +30,8 @@ import { StudentsComponent } from './students/students.component';
         }),
         NgbModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]

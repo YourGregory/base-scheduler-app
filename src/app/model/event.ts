@@ -2,15 +2,15 @@
 import { Student } from './student';
 
 export class Event {
+  id: number;
   student: Student;
-  lessonDay: any;
   lessonStart: Date;
   lessonEnd: Date;
   price: number;
 
-  constructor(student: Student, lessonDay: number, lessonStart: Date, lessonEnd: Date, price: number) {
+  constructor(id: number, student: Student, lessonStart: Date, lessonEnd: Date, price: number) {
+    this.id = id;
     this.student = student;
-    this.lessonDay = lessonDay;
     this.lessonStart = lessonStart;
     this.lessonEnd = lessonEnd;
     this.price = price

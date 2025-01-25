@@ -97,14 +97,3 @@ background-color: #3498db;
 .calendar-header {
     font-size: 24px;
 }
-
-.new-time-column {
-    width: 80px;
-}
-.new-select-column {
-    width: 100px;
-    height: 30px;
-}
-.new-number-column {
-    width: 50px;
-}
